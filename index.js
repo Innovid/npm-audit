@@ -32,7 +32,7 @@ module.exports = options => {
     fs.copyFileSync('./package-lock.json', `${tmpDir}/package-lock.json`);
     const {status: npmInstallStatus, stderr: npmInstallErr} = spawnSync('npm', ['install', '--only=prod'], {cwd: tmpDir});
     if (npmInstallStatus) {
-      console.error(npmInstallErr);
+      console.error(npmInstallErr.toString());
       process.exit(1);
     }
     const {stdout, stderr} = spawnSync('npm', ['audit', '--json'], {cwd: tmpDir});
